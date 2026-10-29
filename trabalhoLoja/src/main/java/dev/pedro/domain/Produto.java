@@ -22,7 +22,7 @@ public abstract class Produto extends Base {
 
     }
 
-    public String getCodigo(int i) {
+    public String getCodigo() {
         return codigo;
     }
 
@@ -49,7 +49,10 @@ public abstract class Produto extends Base {
         this.preco = preco;
     }
 
-    public void setCodigo(int i) {
-
+    public void setCodigo(String  codigo) {
+        if (codigo == null || codigo.isBlank()) {
+            throw new IllegalArgumentException("O codigo é obrigatório.");
+        }
+        this.codigo = codigo;
     }
 }

@@ -6,12 +6,11 @@ public interface Crud<T> {
 
     void salvar(T objeto);
 
-
     List<T> listar();
 
-    void atualizar(int indice, T objeto);
+    void atualizar(String chave, T objeto);
 
-    T buscar(int indice);
+    T buscar(String chave);
 
-    void excluir(int indice);
+    void excluir(String chave);
 }

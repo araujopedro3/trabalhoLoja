@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PessoaDao implements Crud<Pessoa> {
-    private List<Pessoa> listaPessoas = new ArrayList<Pessoa>();
+    private final List<Pessoa> listaPessoas = new ArrayList<>();
 
     @Override
     public void salvar(Pessoa pessoa) {
@@ -16,20 +16,40 @@ public class PessoaDao implements Crud<Pessoa> {
 
     @Override
     public List<Pessoa> listar() {
-        return List.of();
+        return new ArrayList<>(listaPessoas);
     }
 
     @Override
-    public void atualizar(int indice, Pessoa objeto) {
-
+    public void atualizar(String chave, Pessoa pessoa) {
+        for (int i = 0; i < listaPessoas.size(); i++) {
+            if (listaPessoas.get(i).getCpf().equals(chave)) {
+                listaPessoas.set(i, pessoa);
+                return;
+            }
+        }
     }
 
     @Override
-    public Pessoa buscar(int indice) {
-    return null;
+    public Pessoa buscar(String chave) {
+        for (Pessoa pessoa : listaPessoas) {
+            if (pessoa.getCpf().equals(chave)) {
+                return pessoa;
+            }
+        }
+        return null;
     }
 
     @Override
-    public void excluir(int indice) {
+    public void excluir(String chave) {
+        for (int i = 0; i < listaPessoas.size(); i++) {
+            if (listaPessoas.get(i).getCpf().equals(chave)) {
+                listaPessoas.remove(i);
+                return;
+            }
+        }
+    }
+
+    public List<Pessoa> getListaPessoas() {
+        return listaPessoas;
     }
 }
