@@ -9,6 +9,7 @@ public abstract class Produto extends Base {
     private String nome;
     private BigDecimal preco;
 
+
     public Produto(String codigo, String nome, BigDecimal preco) {
         if (codigo == null || codigo.isBlank()) {
             throw new IllegalArgumentException("O codigo e obrigatorio.");

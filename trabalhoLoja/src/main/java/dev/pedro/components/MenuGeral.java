@@ -1,5 +1,8 @@
 package dev.pedro.components;
 
+import dev.pedro.dao.PessoaDao;
+import dev.pedro.dao.ProdutoDao;
+
 import java.util.Scanner;
 
 public final class MenuGeral {
@@ -7,8 +10,7 @@ public final class MenuGeral {
     private MenuGeral() {
     }
 
-    public static void exibir() {
-        Scanner scanner = new Scanner(System.in);
+    public static void exibir(Scanner scanner, PessoaDao pessoaDao, ProdutoDao produtoDao) {
         int opcao;
 
         do {
@@ -20,14 +22,12 @@ public final class MenuGeral {
             opcao = lerOpcao(scanner);
 
             switch (opcao) {
-                case 1 -> MenuPessoa.exibir(scanner);
-                case 2 -> MenuProduto.exibir(scanner);
+                case 1 -> MenuPessoa.exibir(scanner, pessoaDao);
+                case 2 -> MenuProduto.exibir(scanner, produtoDao);
                 case 0 -> System.out.println("Saindo do sistema...");
                 default -> System.out.println("Opção inválida!");
             }
         } while (opcao != 0);
-
-        scanner.close();
     }
 
     static int lerOpcao(Scanner scanner) {
