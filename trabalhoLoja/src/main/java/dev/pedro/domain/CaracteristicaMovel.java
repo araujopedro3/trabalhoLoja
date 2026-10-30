@@ -7,7 +7,8 @@ public enum CaracteristicaMovel {
     EXTENSIVEL("Extensível"),
     COM_GAVETAS("Com gavetas"),
     COM_PRATELEIRAS("Com prateleiras"),
-    COM_PORTAS("Com portas");
+    COM_PORTAS("Com portas"),
+    OUTRA("Outra");
 
     private final String nomeExibicao;
 

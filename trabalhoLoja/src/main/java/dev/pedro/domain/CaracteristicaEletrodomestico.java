@@ -7,7 +7,8 @@ public enum CaracteristicaEletrodomestico {
     CONTROLE_TEMPERATURA("Controle de temperatura"),
     TIMER_PROGRAMAVEL("Timer programável"),
     DESCONGELAMENTO_AUTOMATICO("Descongelamento automático"),
-    CONECTIVIDADE_WIFI("Conectividade Wi-Fi");
+    CONECTIVIDADE_WIFI("Conectividade Wi-Fi"),
+    OUTRA("Outra");
 
     private final String nomeExibicao;
 
