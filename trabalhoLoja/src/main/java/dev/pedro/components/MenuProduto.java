@@ -78,10 +78,10 @@ public final class MenuProduto {
             m.setMaterial(textoObrigatorio(s, "Material: ")); m.setDescricao(textoObrigatorio(s, "Descrição: "));
             m.setDimensaoLargura(dim(s, "Largura (cm): ")); m.setDimensaoComprimento(dim(s, "Comprimento (cm): ")); m.setDimensaoAltura(dim(s, "Altura (cm): "));
             MarcaMovel[] marcas = MarcaMovel.values(); m.setMarca(escolher(s, "Marca do móvel", marcas));
-            m.setCaracteristicas(caracteristicas(s, CaracteristicaMovel.values(), CaracteristicaMovel.class));
+            m.setCaracteristicas(caracteristicas(s, "Características do móvel", CaracteristicaMovel.values(), CaracteristicaMovel.class));
         } else if (p instanceof Eletrodomestico e) {
             e.setMarca(escolher(s, "Marca do eletrodoméstico", MarcaEletrodomestico.values()));
-            e.setCaracteristicas(caracteristicas(s, CaracteristicaEletrodomestico.values(), CaracteristicaEletrodomestico.class));
+            e.setCaracteristicas(caracteristicas(s, "Características do eletrodoméstico", CaracteristicaEletrodomestico.values(), CaracteristicaEletrodomestico.class));
         }
     }
 
@@ -102,8 +102,8 @@ public final class MenuProduto {
     private static <E extends Enum<E>> E escolher(Scanner s, String titulo, E[] valores) {
         while (true) { System.out.println(titulo + ":"); for (int i=0;i<valores.length;i++) System.out.println((i+1)+" - "+valores[i]); System.out.print("Opção: "); int n=MenuGeral.lerOpcao(s); if(n>0&&n<=valores.length)return valores[n-1]; System.out.println("Opção inválida."); }
     }
-    private static <E extends Enum<E>> EnumSet<E> caracteristicas(Scanner s, E[] vals, Class<E> type) {
-        System.out.println("Características (números separados por vírgula; 0 para nenhuma):"); for(int i=0;i<vals.length;i++)System.out.println((i+1)+" - "+vals[i]);
+    private static <E extends Enum<E>> EnumSet<E> caracteristicas(Scanner s, String titulo, E[] vals, Class<E> type) {
+        System.out.println(titulo + " (números separados por vírgula; 0 para nenhuma):"); for(int i=0;i<vals.length;i++)System.out.println((i+1)+" - "+vals[i]);
         while(true){System.out.print("Opções: ");String in=s.nextLine().trim();EnumSet<E> set=EnumSet.noneOf(type);if(in.equals("0")||in.isEmpty())return set;try{for(String a:in.split("[,;\\s]+")){int n=Integer.parseInt(a);if(n<1||n>vals.length)throw new NumberFormatException();set.add(vals[n-1]);}return set;}catch(NumberFormatException ex){System.out.println("Seleção inválida.");}}
     }
     private static String texto(Scanner s,String p){System.out.print(p);return s.nextLine().trim();}

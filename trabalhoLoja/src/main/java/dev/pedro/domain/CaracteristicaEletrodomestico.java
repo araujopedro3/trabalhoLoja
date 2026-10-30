@@ -1,13 +1,13 @@
 package dev.pedro.domain;
 
 public enum CaracteristicaEletrodomestico {
-    VOLTAGEM("Voltagem"),
-    EFICIENCIA_ENERGETICA("Eficiência energética"),
-    CAPACIDADE("Capacidade"),
-    TIPO_PAINEL("Tipo de painel"),
-    CONECTIVIDADE("Conectividade"),
-    PORTATIL("Portátil"),
-    ERGONOMICO("Ergonômico");
+    BAIXO_CONSUMO_ENERGIA("Baixo consumo de energia"),
+    TECNOLOGIA_INVERTER("Tecnologia inverter"),
+    PAINEL_DIGITAL("Painel digital"),
+    CONTROLE_TEMPERATURA("Controle de temperatura"),
+    TIMER_PROGRAMAVEL("Timer programável"),
+    DESCONGELAMENTO_AUTOMATICO("Descongelamento automático"),
+    CONECTIVIDADE_WIFI("Conectividade Wi-Fi");
 
     private final String nomeExibicao;
 

@@ -3,11 +3,11 @@ package dev.pedro.domain;
 public enum CaracteristicaMovel {
     ESTOFADO("Estofado"),
     DOBRAVEL("Dobrável"),
+    RECLINAVEL("Reclinável"),
+    EXTENSIVEL("Extensível"),
     COM_GAVETAS("Com gavetas"),
     COM_PRATELEIRAS("Com prateleiras"),
-    RESISTENTE_A_UMIDADE("Resistente à umidade"),
-    MONTAGEM_FACIL("Montagem fácil"),
-    ERGONOMICO("Ergonômico");
+    COM_PORTAS("Com portas");
 
     private final String nomeExibicao;
 
