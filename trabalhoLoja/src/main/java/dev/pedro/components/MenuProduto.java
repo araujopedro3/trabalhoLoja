@@ -19,7 +19,7 @@ public final class MenuProduto {
         ProdutoDao dao = new ProdutoDao();
 
         do {
-            System.out.println("\n===== MENU PRODUTO =====");
+            System.out.println("\n---- MENU PRODUTO ----");
             System.out.println("1 - Cadastrar produto");
             System.out.println("2 - Listar produtos");
             System.out.println("3 - Buscar produto");
@@ -53,11 +53,56 @@ public final class MenuProduto {
                     break;
 
                 case 4:
-                    System.out.println("Atualizar produto: ainda não implementado.");
+                    System.out.print("Digite o código do produto que deseja atualizar: ");
+                    String codigoAtualiza = scanner.nextLine().trim();
+                    Produto produtoAtualiza = dao.buscar(codigoAtualiza);
+
+                    if (produtoAtualiza == null) {
+                        System.out.println("Produto não encontrado.");
+                        break;
+                    }
+
+                    System.out.println("Produto: " + produtoAtualiza.getNome()
+                            + " - Código: " + produtoAtualiza.getCodigo());
+
+                    System.out.print("Confirma a atualização? (S/N): ");
+                    String confirmaAtualizacao = scanner.nextLine().trim();
+
+                    if (confirmaAtualizacao.equalsIgnoreCase("S")) {
+                        System.out.print("Digite o novo nome: ");
+                        produtoAtualiza.setNome(scanner.nextLine().trim());
+
+                        System.out.print("Digite o novo preço: ");
+                        produtoAtualiza.setPreco(new BigDecimal(scanner.nextLine().trim()));
+
+                        dao.atualizar(codigoAtualiza, produtoAtualiza);
+                        System.out.println("Produto atualizado com sucesso!");
+                    } else {
+                        System.out.println("Atualização cancelada.");
+                    }
                     break;
 
                 case 5:
-                    System.out.println("Deletar produto: ainda não implementado.");
+                    System.out.print("Digite o código do produto que deseja excluir: ");
+                    String codigoDeleta = scanner.nextLine().trim();
+                    Produto produtoDeletar = dao.buscar(codigoDeleta);
+
+                    if (produtoDeletar == null) {
+                        System.out.println("Produto não encontrado.");
+                    } else {
+                        System.out.println("Produto: " + produtoDeletar.getNome()
+                                + " - Código: " + produtoDeletar.getCodigo());
+
+                        System.out.print("Confirma a exclusão? (S/N): ");
+                        String confirmaDeletar = scanner.nextLine().trim();
+
+                        if (confirmaDeletar.equalsIgnoreCase("S")) {
+                            dao.excluir(codigoDeleta);
+                            System.out.println("Produto excluído com sucesso!");
+                        } else {
+                            System.out.println("Exclusão cancelada.");
+                        }
+                    }
                     break;
 
                 case 0:

@@ -12,7 +12,7 @@ public final class MenuGeral {
         int opcao;
 
         do {
-            System.out.println("\n===== MENU GERAL =====");
+            System.out.println("\n---- MENU GERAL ----");
             System.out.println("1 - Clientes");
             System.out.println("2 - Produtos");
             System.out.println("0 - Sair");

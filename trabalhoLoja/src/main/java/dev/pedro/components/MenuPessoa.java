@@ -5,6 +5,7 @@ import dev.pedro.domain.Endereco;
 import dev.pedro.domain.Pessoa;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public final class MenuPessoa {
         int opcao;
 
         do {
-            System.out.println("\n===== MENU CLIENTE =====");
+            System.out.println("\n---- MENU CLIENTE ----");
             System.out.println("1 - Cadastrar cliente");
             System.out.println("2 - Listar clientes");
             System.out.println("3 - Buscar cliente");
@@ -35,8 +36,30 @@ public final class MenuPessoa {
                     break;
 
                 case 2:
-                    for(Pessoa pessoa : dao.listar()) {
-                        System.out.println(pessoa.getNome() + " - CPF: " + pessoa.getCpf());
+                    if (dao.listar().isEmpty()) {
+                        System.out.println("Nenhum cliente cadastrado.");
+                    } else {
+                        System.out.println("\n--- Listagem de clientes ---");
+
+                        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                        for (Pessoa pessoa : dao.listar()) {
+                            System.out.println("Nome: " + pessoa.getNome());
+                            System.out.println("Data de nascimento: "
+                                    + pessoa.getDataNascimento().format(formato));
+                            System.out.println("CPF: " + pessoa.getCpf());
+                            System.out.println("Gênero: " + pessoa.getGenero());
+                            System.out.println("Email: " + pessoa.getEmail());
+                            System.out.println("Telefone: " + pessoa.getTelefone());
+
+                            Endereco endereco = pessoa.getEndereco();
+                            if (endereco != null) {
+                                System.out.println("Endereço: " + endereco.getRua() + ", "
+                                        + endereco.getNumero() + " - " + endereco.getCidade());
+                            } else {
+                                System.out.println("Endereço: não informado");
+                            }
+                        }
                     }
                     break;
 
@@ -80,7 +103,7 @@ public final class MenuPessoa {
                     break;
 
                 case 5:
-                    System.out.println("Digite o CPF do cliente para a exclusão: ");
+                    System.out.println("Digite o CPF do cliente para a exclusão \uD83D\uDEA8: ");
                     String cpfDeleta = scanner.nextLine().trim();
                     Pessoa clienteDeletado = dao.buscar(cpfDeleta);
 
@@ -89,7 +112,7 @@ public final class MenuPessoa {
                     } else {
                         System.out.println("Nome: " + clienteDeletado.getNome() + " - CPF: " + clienteDeletado.getCpf());
 
-                        System.out.println("Confirma o excluimento do Úsuario? (S/N");
+                        System.out.println("Confirma o excluimento do Úsuario? (S/N)");
                         String confirmaDeletar = scanner.nextLine().trim();
                             if (confirmaDeletar.equalsIgnoreCase("S")) {
                                 dao.excluir(cpfDeleta);
@@ -142,14 +165,16 @@ public final class MenuPessoa {
     }
 
     private static LocalDate lerData(Scanner scanner) {
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         while (true) {
-            System.out.print("Digite sua data de nascimento (AAAA-MM-DD): ");
-            String entrada = scanner.nextLine().trim().replace('/', '-');
+            System.out.print("Digite sua data de nascimento (DD/MM/AAAA): ");
+            String entrada = scanner.nextLine().trim().replace('-', '/');
 
             try {
-                return LocalDate.parse(entrada);
+                return LocalDate.parse(entrada, formato);
             } catch (DateTimeParseException e) {
-                System.out.println("Data inválida. Exemplo de formato correto: 2008-05-25.");
+                System.out.println("Data inválida. Exemplo: 25/05/2008.");
             }
         }
     }
